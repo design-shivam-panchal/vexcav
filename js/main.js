@@ -1,26 +1,33 @@
-// 3D tilt effect on hero visual
-const hero3d = document.getElementById('hero3d');
-if (hero3d) {
-  const card = hero3d.querySelector('.hero-3d-card');
-  const shine = hero3d.querySelector('.hero-3d-shine');
-
-  hero3d.addEventListener('mousemove', (e) => {
-    const rect = hero3d.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-
-    const rotateX = (0.5 - y) * 20;
-    const rotateY = (x - 0.5) * 20;
-
-    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-
-    // Move shine based on mouse position
-    shine.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.12) 0%, transparent 50%)`;
+// Active nav link based on current page
+(function() {
+  const path = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(function(link) {
+    link.classList.remove('active');
+    const href = link.getAttribute('href');
+    if (path === '/' || path === '/index.html') {
+      if (href === '/' || href === '/index.html') link.classList.add('active');
+    } else if (href === path) {
+      link.classList.add('active');
+    }
   });
+})();
 
-  hero3d.addEventListener('mouseleave', () => {
-    card.style.transform = 'rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-    shine.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.03) 100%)';
+// Hero orb interactive parallax
+const heroOrb = document.querySelector('.hero-orb');
+if (heroOrb) {
+  heroOrb.addEventListener('mousemove', (e) => {
+    const rect = heroOrb.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    const core = heroOrb.querySelector('.orb-core');
+    if (core) {
+      core.style.transform = `translate(${x * 12}px, ${y * 12}px)`;
+    }
+  });
+  heroOrb.addEventListener('mouseleave', () => {
+    const core = heroOrb.querySelector('.orb-core');
+    if (core) core.style.transform = 'translate(0, 0)';
   });
 }
 
@@ -113,3 +120,44 @@ if (navToggle && navLinks) {
     });
   });
 }
+
+// Portfolio work filter
+const workFilters = document.querySelectorAll('.work-filter');
+const workCards = document.querySelectorAll('.work-card');
+
+if (workFilters.length > 0 && workCards.length > 0) {
+  workFilters.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      workFilters.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+      workCards.forEach(function(card) {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+}
+
+// Scroll reveal animation for sections
+(function() {
+  const sections = document.querySelectorAll('.section, .page-hero');
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(function(section) {
+    section.classList.add('reveal-on-scroll');
+    observer.observe(section);
+  });
+})();
