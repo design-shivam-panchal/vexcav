@@ -1,221 +1,742 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vexacv | Coming Soon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
-    <style>
-        /* CSS Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Moving Gradient Background */
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(-45deg, #020010, #090930, #180b33, #0f173b);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: #ffffff;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Canvas Particle Layer */
-        #particle-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* Glassmorphic Container */
-        .glass-container {
-            position: relative;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 24px;
-            padding: 4rem;
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-        }
-
-        /* Typography */
-        .brand-name {
-            font-size: 1.2rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 2rem;
-            font-weight: 600;
-        }
-
-        .main-title {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 20px rgba(165, 180, 252, 0.2);
-        }
-
-        .tagline {
-            font-size: 1.15rem;
-            color: #94a3b8;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        /* Staggered Animations */
-        .animate-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .glass-container {
-                padding: 3rem 2rem;
-            }
-            .main-title {
-                font-size: 2.8rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vexcav — Transform the Way Your Brand Thinks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a href="#hero" class="nav-logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M4 14C4 8.477 8.477 4 14 4s10 5.477 10 10-4.477 10-10 10" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+          <path d="M10 14c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span>Vexcav</span>
+      </a>
 
-    <canvas id="particle-canvas"></canvas>
+      <nav class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#blog">Blogs</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-    <main class="glass-container">
-        <header class="brand-name animate-up delay-1">Vexacv</header>
-        <h1 class="main-title animate-up delay-2">Coming Soon</h1>
-        <p class="tagline animate-up delay-3">Where Vision Meets Innovation.</p>
-    </main>
+      <a href="#contact" class="nav-cta">
+        <span>Get Started</span>
+      </a>
 
-    <script>
-        // Custom Lightweight Particle Network
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        let width, height;
-        let particles = [];
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-        // Adjust particle count based on screen size for performance
-        const getParticleCount = () => window.innerWidth < 768 ? 40 : 80;
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="hero-grid-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-content">
+          <p class="hero-tagline">Intelligence. Creativity. Momentum.</p>
+          <h1 class="hero-heading">
+            Transform the Way Your <span class="hero-gradient-text">Brand Thinks</span>
+          </h1>
+          <p class="hero-description">
+            Our team transforms complex ideas into clear digital strategies — powered by design, storytelling, and AI-driven insight — helping startups and enterprises scale with creativity and confidence.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn-primary">
+              <span>Get Started</span>
+            </a>
+            <a href="#" class="btn-showreel">
+              <span class="play-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </span>
+              <span>View Showreel</span>
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual hero-3d" id="hero3d">
+          <div class="hero-3d-card">
+            <div class="hero-3d-glow"></div>
+            <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/694e95f366e523eacd4a1386_Hero%20Component.webp" alt="Vexcav Hero" loading="eager">
+            <div class="hero-3d-shine"></div>
+          </div>
+        </div>
+      </div>
 
-        function resizeCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
+      <!-- Trusted By -->
+      <div class="trusted-bar">
+        <h2 class="trusted-heading">Trusted By More Than 500 <span class="hero-gradient-text">Companies.</span></h2>
+        <div class="trusted-logos">
+          <div class="logo-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg><span>Epicurious</span></div>
+          <div class="logo-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg><span>Activeflow</span></div>
+          <div class="logo-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg><span>Systemica</span></div>
+          <div class="logo-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span>GlobalStack</span></div>
+          <div class="logo-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span>Goodwell</span></div>
+          <div class="logo-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Vericloud</span></div>
+          <div class="logo-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span>FluxNova</span></div>
+          <div class="logo-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Percolation</span></div>
+        </div>
+      </div>
+    </section>
 
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-            initParticles();
-        });
+    <!-- Why Choose Vexcav -->
+    <section id="about" class="section about-section">
+      <div class="about-top">
+        <!-- Left: Description + Team CTA -->
+        <div class="about-left">
+          <p class="about-text">We don't guess — we analyze, design, and refine. Our team blends strategic thinking, cutting-edge design, and AI-powered insights to craft brands that don't just stand out — they lead.</p>
+          <a href="#" class="about-team-btn">
+            <div class="about-avatars">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/6921bb3b5e4939826685a28b_Button%20avatar%201.webp" alt="" width="32" height="32">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/6921bb3bdd5644a79fb4a147_Button%20avatar%202.webp" alt="" width="32" height="32">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/6921bb3bcf460de83b8198a1_Button%20avatar%203.webp" alt="" width="32" height="32">
+            </div>
+            <span>Meet The Team</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.6; // Velocity X
-                this.vy = (Math.random() - 0.5) * 0.6; // Velocity Y
-                this.radius = Math.random() * 1.5 + 0.5;
-            }
+        <!-- Right: Section Header -->
+        <div class="about-right">
+          <p class="section-eyebrow">Why Choose Vexcav</p>
+          <h2 class="section-heading" style="text-align:left;">Intelligence Fuels<br>Our <em class="hero-gradient-text">Creativity.</em></h2>
+          <a href="#" class="about-learn-more">
+            Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
 
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
+      <!-- Feature Cards -->
+      <div class="about-cards">
+        <div class="about-card">
+          <div class="about-card-img">
+            <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/6922dcbbb48d5e476cbee383_Why%20choose%2001.webp" alt="Data-Driven" loading="lazy">
+          </div>
+          <h3>Data-Driven,<br><em>Human-Led.</em></h3>
+          <p>We craft adaptive strategies powered by AI insights and human intuition.</p>
+        </div>
 
-                // Bounce off edges
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
+        <div class="about-card about-card-center">
+          <h3>Creative That<br><em>Converts.</em></h3>
+          <div class="about-card-img">
+            <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/6922dcbb06c1846d1a3bcf6e_Why%20choose%2002.webp" alt="Creative" loading="lazy">
+          </div>
+          <p>Our designs blend emotion and clarity to build meaningful brand experiences.</p>
+        </div>
 
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-                ctx.fill();
-            }
-        }
+        <div class="about-card">
+          <h3>Results You Can<br><em>Measure.</em></h3>
+          <p>Every campaign is optimized to drive consistent growth and lasting impact.</p>
+          <div class="about-card-img about-card-img-row">
+            <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/6922dcbb5ff23fcb91d92ecc_Why%20choose%2003.webp" alt="Results" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
 
-        function initParticles() {
-            particles = [];
-            const count = getParticleCount();
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
-            }
-        }
+    <!-- Services -->
+    <section id="services" class="section services-section">
+      <div class="services-grid-bg"></div>
+      <div class="services-inner">
+        <div class="services-badge">Services</div>
+        <h2 class="section-heading">Our Core <em class="hero-gradient-text">Services</em></h2>
+        <p class="section-desc">Transforming creativity into results through data-driven design and intelligent strategy.</p>
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
+        <!-- Outer glass container -->
+        <div class="services-glass-wrapper">
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><circle cx="17" cy="8" r="2"/><path d="M15 8h-2"/></svg>
+              </div>
+              <h3>Creative <em>Branding</em></h3>
+              <p>Craft memorable brand identities that inspire trust and capture attention.</p>
+            </div>
 
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+            <div class="service-card">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/><path d="M2 20h20"/></svg>
+              </div>
+              <h3>Seo & Growth <em>Optimization</em></h3>
+              <p>Turn visibility into measurable growth with strategic search and content planning.</p>
+            </div>
 
-                // Draw connecting lines
-                for (let j = i + 1; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
+            <div class="service-card">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M14 12h4"/><circle cx="12" cy="12" r="2"/></svg>
+              </div>
+              <h3>Paid Media <em>Campaigns</em></h3>
+              <p>Maximize ROI with targeted ads designed for conversion and performance.</p>
+            </div>
 
-                    if (distance < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        // Opacity based on distance
-                        ctx.strokeStyle = `rgba(165, 180, 252, ${0.15 - distance / 800})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
+            <div class="service-card">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <h3>Social Media <em>Presence</em></h3>
+              <p>Build engagement and amplify awareness across all major social platforms.</p>
+            </div>
+          </div>
+        </div>
 
-        // Initialize
-        resizeCanvas();
-        initParticles();
-        animate();
-    </script>
+        <div class="services-cta">
+          <a href="#" class="btn-primary">Explore Our Services</a>
+          <a href="#" class="services-arrow-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showreel / Video -->
+    <section id="projects" class="section showreel-section">
+      <div class="showreel-inner">
+        <p class="section-eyebrow">Our Expertise — In Motion</p>
+        <h2 class="section-heading">A Glimpse Into Our <em class="hero-gradient-text">Creativity</em>, Data, And <em class="hero-gradient-text">AI Experience</em></h2>
+        <p class="section-desc">Watch how Vexcav transforms bold ideas into measurable brand success. Our 2-minute showreel highlights the strategy, design, and impact behind every campaign.</p>
+
+        <div class="showreel-video">
+          <div class="showreel-thumb">
+            <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/69518b07d9549ce23ac40e6a_Video%20Thumbnail%20Image.webp" alt="Showreel Thumbnail" loading="lazy">
+            <div class="showreel-play">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="showreel-overlay"></div>
+          </div>
+        </div>
+
+        <a href="#services" class="btn-primary" style="margin-top:40px;">View All Services</a>
+      </div>
+    </section>
+    <!-- Projects -->
+    <section id="case-studies" class="section projects-section">
+      <div class="projects-inner">
+        <p class="section-eyebrow">Our Projects</p>
+        <h2 class="section-heading">Innovation, and Excellence in<br>Every Project We <em class="hero-gradient-text">Deliver.</em></h2>
+        <p class="section-desc">Our work has been honored by some of the industry's most respected organizations — a testament to our passion for quality and forward-thinking design.</p>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-img">
+              <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/6947cbbb3dd0b79a55d05648_Project%2001%20webp.webp" alt="BrightNest" loading="lazy">
+              <div class="project-tags">
+                <span class="project-tag">Branding & Marketing</span>
+                <span class="project-tag">Brand Strategy</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>BrightNest</h3>
+              <p>Full branding and digital identity for a modern lifestyle startup.</p>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img">
+              <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/6947cbc917b2b1718cd0f044_Project%2002%20webp.webp" alt="StellarWorks" loading="lazy">
+              <div class="project-tags">
+                <span class="project-tag">Branding & Marketing</span>
+                <span class="project-tag">Brand Strategy</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>StellarWorks</h3>
+              <p>Brand identity and positioning for a global creative studio.</p>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img">
+              <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/694e2821dafae97fa553d363_Project%2003%20webp.webp" alt="NovaLaunch" loading="lazy">
+              <div class="project-tags">
+                <span class="project-tag">SEO & Growth</span>
+                <span class="project-tag">Technical SEO</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>NovaLaunch</h3>
+              <p>SEO and growth optimization for a SaaS product launch.</p>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img">
+              <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/694e2831ebc6de25b4ec8e31_Project%2004%20webp.webp" alt="PixelWave" loading="lazy">
+              <div class="project-tags">
+                <span class="project-tag">Branding & Marketing</span>
+                <span class="project-tag">Bid Optimization</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>PixelWave</h3>
+              <p>High-performance paid media campaigns for a digital product brand.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="btn-primary" style="margin-top:48px;">View All Projects</a>
+      </div>
+    </section>
+    <!-- Case Studies -->
+    <section id="blog" class="section casestudies-section">
+      <div class="casestudies-inner">
+        <p class="section-eyebrow">Case Studies</p>
+        <h2 class="section-heading">Crafting Impactful Experiences,<br>One Brand at a <em class="hero-gradient-text">Time</em></h2>
+        <p class="section-desc">Every project we take on is an opportunity to innovate. From digital campaigns to full-scale rebrands, our work blends creativity with measurable performance.</p>
+
+        <div class="casestudies-list">
+          <!-- Case Study 1 -->
+          <div class="case-card">
+            <div class="case-img">
+              <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/6947bf851b782b6ff11ca910_Case%20Study%2001%20webp.webp" alt="Hyperion 3d.io" loading="lazy">
+              <span class="case-category">Web Design</span>
+            </div>
+            <div class="case-body">
+              <div class="case-header">
+                <h3>Hyperion 3d.io</h3>
+                <p>High-performance digital experience for a complex SaaS platform.</p>
+              </div>
+              <div class="case-details">
+                <div class="case-box">
+                  <span class="case-box-label">Challenge</span>
+                  <p>Complex interface caused low user engagement.</p>
+                </div>
+                <div class="case-box">
+                  <span class="case-box-label">Solution</span>
+                  <p>Simplified UX with clear flows and scalable design.</p>
+                </div>
+              </div>
+              <div class="case-stats">
+                <div class="case-stat">
+                  <span class="case-stat-num">95%</span>
+                  <span class="case-stat-label">User Engagement Uplift</span>
+                </div>
+                <div class="case-stat">
+                  <span class="case-stat-num">+42%</span>
+                  <span class="case-stat-label">Conversions Growth</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 2 -->
+          <div class="case-card">
+            <div class="case-img">
+              <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/6947bf925d271db7778a8c34_Case%20Study%2002%20webp.webp" alt="BoldMoves.ai" loading="lazy">
+              <span class="case-category">SEO</span>
+            </div>
+            <div class="case-body">
+              <div class="case-header">
+                <h3>BoldMoves.ai</h3>
+                <p>Scaling organic growth for a competitive SaaS product launch.</p>
+              </div>
+              <div class="case-details">
+                <div class="case-box">
+                  <span class="case-box-label">Challenge</span>
+                  <p>Unclear messaging reduces conversions and trust.</p>
+                </div>
+                <div class="case-box">
+                  <span class="case-box-label">Solution</span>
+                  <p>Refined positioning and optimized conversion funnel.</p>
+                </div>
+              </div>
+              <div class="case-stats">
+                <div class="case-stat">
+                  <span class="case-stat-num">62%</span>
+                  <span class="case-stat-label">Organic Traffic Growth</span>
+                </div>
+                <div class="case-stat">
+                  <span class="case-stat-num">47%</span>
+                  <span class="case-stat-label">Increase in Qualified Leads</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 3 -->
+          <div class="case-card">
+            <div class="case-img">
+              <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/6947bf9ea6bca65e5d899af2_Case%20Study%2003%20webp.webp" alt="Studio Focus" loading="lazy">
+              <span class="case-category">Paid Media</span>
+            </div>
+            <div class="case-body">
+              <div class="case-header">
+                <h3>Studio Focus</h3>
+                <p>Crafting a high-performance digital experience for the next era of strategy platforms.</p>
+              </div>
+              <div class="case-details">
+                <div class="case-box">
+                  <span class="case-box-label">Challenge</span>
+                  <p>Low organic visibility and inconsistent brand presence.</p>
+                </div>
+                <div class="case-box">
+                  <span class="case-box-label">Solution</span>
+                  <p>SEO-driven content and unified brand system.</p>
+                </div>
+              </div>
+              <div class="case-stats">
+                <div class="case-stat">
+                  <span class="case-stat-num">4.3x</span>
+                  <span class="case-stat-label">ROAS</span>
+                </div>
+                <div class="case-stat">
+                  <span class="case-stat-num">36%</span>
+                  <span class="case-stat-label">Lower CPA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="btn-primary" style="margin-top:48px;">View All Case Studies</a>
+      </div>
+    </section>
+    <!-- Stats -->
+    <section class="section stats-section">
+      <div class="stats-inner">
+        <p class="section-eyebrow">Numbers That Tell Our Story</p>
+        <h2 class="section-heading">Results, Impact, And A Decade<br>Of Creative <em class="hero-gradient-text">Excellence.</em></h2>
+        <p class="section-desc">Behind every project is a measurable success. These numbers reflect our dedication to performance, creativity, and client growth.</p>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-number" data-target="98.7">0</span><span class="stat-suffix">%</span>
+            <p>Client satisfaction rate across global projects</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" data-target="250">0</span><span class="stat-suffix">M+</span>
+            <p>Revenue generated for clients through strategic campaigns</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" data-target="67">0</span><span class="stat-suffix">%</span>
+            <p>Average increase in client sales within six months</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" data-target="12">0</span><span class="stat-suffix">+ Years</span>
+            <p>Of design, innovation, and marketing expertise</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Testimonials -->
+    <section id="contact" class="section testimonials-section">
+      <div class="testimonials-inner">
+        <p class="section-eyebrow">What Our Clients Say</p>
+        <h2 class="section-heading">Genuine Voices From Brands That<br>Grew with <em class="hero-gradient-text">Vexcav Vision.</em></h2>
+        <p class="section-desc">Our clients are the core of our success. Here's how they describe their experience working with our team of strategists, designers, and marketers.</p>
+
+        <div class="testimonials-carousel">
+          <div class="testimonials-track" id="testimonialsTrack">
+            <div class="testimonial-card">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/69271f7846dcdc390f9a9756_Testimonial%2001.webp" alt="Daniel Morris">
+              <p class="testimonial-quote">"Vexcav delivered clarity, strategy, and results — exactly what our brand needed to scale."</p>
+              <p class="testimonial-author">— Daniel Morris, CEO</p>
+            </div>
+            <div class="testimonial-card">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/69271f78ff43efaa891f1e01_Testimonial%2002.webp" alt="Olivia Chen">
+              <p class="testimonial-quote">"Insightful, forward-thinking, and execution-focused — Vexcav truly understands growth."</p>
+              <p class="testimonial-author">— Olivia Chen, Co-Founder</p>
+            </div>
+            <div class="testimonial-card">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/69525044bb4ac58bb7777560_testimonial%201.webp" alt="Michael Turner">
+              <p class="testimonial-quote">"A strategic partner with vision — Vexcav helped us move faster and smarter."</p>
+              <p class="testimonial-author">— Michael Turner, Product Lead</p>
+            </div>
+            <div class="testimonial-card">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/69525044aac8e69a98dcb0df_testimonial%204.webp" alt="Sophia Bennett">
+              <p class="testimonial-quote">"Professional from start to finish — their strategic thinking set us apart."</p>
+              <p class="testimonial-author">— Sophia Bennett, Founder</p>
+            </div>
+            <div class="testimonial-card">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/69525044347da6c20400a8fc_testimonial%202.webp" alt="James Walker">
+              <p class="testimonial-quote">"Vexcav combines creativity with strategy to deliver real business impact."</p>
+              <p class="testimonial-author">— James Walker, Founder</p>
+            </div>
+            <div class="testimonial-card">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/695250441f0ba9e4a4050afe_testimonial%203.webp" alt="Rachel Adams">
+              <p class="testimonial-quote">"Vision-driven, precise, and scalable — working with Vexcav was a game-changer."</p>
+              <p class="testimonial-author">— Rachel Adams, Operations Head</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonials-nav">
+          <button class="testi-dot active" data-slide="0">1</button>
+          <button class="testi-dot" data-slide="1">2</button>
+          <button class="testi-dot" data-slide="2">3</button>
+          <button class="testi-dot" data-slide="3">4</button>
+          <button class="testi-dot" data-slide="4">5</button>
+          <button class="testi-dot" data-slide="5">6</button>
+        </div>
+      </div>
+    </section>
+    <!-- Recognition -->
+    <section class="section recognition-section">
+      <div class="recognition-inner">
+        <p class="section-eyebrow">Recognition</p>
+        <h2 class="section-heading">Creativity, Innovation, and Excellence in<br>Every Project We <em class="hero-gradient-text">Deliver.</em></h2>
+        <p class="section-desc">We don't just follow trends — we study them, challenge them, and turn them into actionable ideas. Read the latest from our team of strategists, designers, and marketers.</p>
+
+        <div class="recognition-grid">
+          <!-- Left: Companies -->
+          <div class="recognition-companies">
+            <div class="recognition-company">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/694ac174219713336233c70e_Company%20-1.webp" alt="Anova Lab" width="40" height="40">
+              <div>
+                <p class="company-name">Anova Lab</p>
+                <p class="company-type">Product Design Studio</p>
+              </div>
+            </div>
+            <div class="recognition-company">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/694ac1744fa8bc9d1674fdf1_Company%20-2.webp" alt="Anova Flow" width="40" height="40">
+              <div>
+                <p class="company-name">Anova Flow</p>
+                <p class="company-type">Brand & Marketing Agency</p>
+              </div>
+            </div>
+            <div class="recognition-company">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/694ac174133dd0fb193ec365_Company%20-3.webp" alt="Nova Persona" width="40" height="40">
+              <div>
+                <p class="company-name">Nova Persona</p>
+                <p class="company-type">UX Consultancy</p>
+              </div>
+            </div>
+            <div class="recognition-company">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/694ac1740e019542d921163e_Company%20-4.webp" alt="Nova Night" width="40" height="40">
+              <div>
+                <p class="company-name">Nova Night</p>
+                <p class="company-type">Creative Design Lab</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Awards -->
+          <div class="recognition-awards">
+            <div class="recognition-award">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/694ac0a05a125de77103c9c7_Experience%2001.webp" alt="Best Partner" width="48" height="48">
+              <div>
+                <p class="award-name">Best Partner</p>
+                <p class="award-year">2024</p>
+              </div>
+            </div>
+            <div class="recognition-award">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/694ac0a0295dc18b575c7da8_Experience%2003.webp" alt="Top Collaborator" width="48" height="48">
+              <div>
+                <p class="award-name">Top Collaborator</p>
+                <p class="award-year">2023</p>
+              </div>
+            </div>
+            <div class="recognition-award">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/694ac0a06cc10d276264e9c4_Experience%2004.webp" alt="UX Excellence" width="48" height="48">
+              <div>
+                <p class="award-name">UX Excellence</p>
+                <p class="award-year">2021</p>
+              </div>
+            </div>
+            <div class="recognition-award">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/694ac0a0e50c3f8cf515acf4_Experience%2002.webp" alt="Creative Award" width="48" height="48">
+              <div>
+                <p class="award-name">Creative Award</p>
+                <p class="award-year">2020</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Team -->
+    <section class="section team-section">
+      <div class="team-inner">
+        <p class="section-eyebrow">Behind the Magic</p>
+        <h2 class="section-heading">Join A Team Shaping The<br>Brands Of <em class="hero-gradient-text">tomorrow.</em></h2>
+        <p class="section-desc">We're a multidisciplinary team united by a shared vision — blending creativity, data, and technology to redefine how brands grow in the AI era.</p>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-card-img">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/6926a94e14edb4e8cb0eeb59_Team%2001.webp" alt="Marcus Leclerc" loading="lazy">
+              <div class="team-card-glow"></div>
+            </div>
+            <h3>Marcus Leclerc</h3>
+            <p class="team-card-role">Founder & CEO</p>
+            <p class="team-card-desc">Leading strategy with data-driven creativity.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/6926a94ed0370bc41822020d_Team%2002.webp" alt="Sofia Klein" loading="lazy">
+              <div class="team-card-glow"></div>
+            </div>
+            <h3>Sofia Klein</h3>
+            <p class="team-card-role">Creative Director</p>
+            <p class="team-card-desc">Turning complex ideas into beautiful visual stories.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/6926a94e2be8b119d101d34e_Team%2003.webp" alt="Daniel Hartmann" loading="lazy">
+              <div class="team-card-glow"></div>
+            </div>
+            <h3>Daniel Hartmann</h3>
+            <p class="team-card-role">Marketing Lead</p>
+            <p class="team-card-desc">Bridging analytics with audience insight.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img">
+              <img src="https://cdn.prod.website-files.com/69208270d718f89af9d92f8a/6926a94ed863ca23b4db52bd_Team%2004.webp" alt="Ana Morales" loading="lazy">
+              <div class="team-card-glow"></div>
+            </div>
+            <h3>Ana Morales</h3>
+            <p class="team-card-role">UX/UI Designer</p>
+            <p class="team-card-desc">Designing experiences that feel intuitive and premium.</p>
+          </div>
+        </div>
+
+        <a href="#" class="btn-primary" style="margin-top:48px;">Join Our Team</a>
+      </div>
+    </section>
+    <!-- Blog -->
+    <section class="section blog-section">
+      <div class="blog-inner">
+        <p class="section-eyebrow">Blog & Articles</p>
+        <h2 class="section-heading">Thoughts on<br>Design & <em class="hero-gradient-text">Creativity</em></h2>
+        <p class="section-desc">Welcome to our blog, where we share perspectives on design, creativity, and the ideas that inspire meaningful work.</p>
+
+        <div class="blog-carousel">
+          <div class="blog-track" id="blogTrack">
+            <div class="blog-card">
+              <div class="blog-card-img">
+                <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/694e28fac086895224989a37_Blog%2001%20webp.webp" alt="Branding Builds Trust" loading="lazy">
+              </div>
+              <div class="blog-card-meta">
+                <span class="blog-tag">Marketing</span>
+                <span class="blog-read">5 min read</span>
+              </div>
+              <h3>Branding Builds Trust Drives Growth</h3>
+            </div>
+
+            <div class="blog-card">
+              <div class="blog-card-img">
+                <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/694e2907e557b65510d2126e_Blog%2002%20webp.webp" alt="Sustainable SEO" loading="lazy">
+              </div>
+              <div class="blog-card-meta">
+                <span class="blog-tag">Marketing</span>
+                <span class="blog-read">5 min read</span>
+              </div>
+              <h3>Sustainable SEO Strategies for 2025</h3>
+            </div>
+
+            <div class="blog-card">
+              <div class="blog-card-img">
+                <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/694e291262d6b52131d940b9_Blog%2003%20webp.webp" alt="Paid Ads" loading="lazy">
+              </div>
+              <div class="blog-card-meta">
+                <span class="blog-tag">Marketing</span>
+                <span class="blog-read">5 min read</span>
+              </div>
+              <h3>Paid Ads Driving Measurable Growth</h3>
+            </div>
+
+            <div class="blog-card">
+              <div class="blog-card-img">
+                <img src="https://cdn.prod.website-files.com/69359695a86074ef5b9121bc/694e291e558deec2be9640ef_Blog%2004%20webp.webp" alt="Social Media" loading="lazy">
+              </div>
+              <div class="blog-card-meta">
+                <span class="blog-tag">Marketing</span>
+                <span class="blog-read">5 min read</span>
+              </div>
+              <h3>Social Media Builds Trust & Authority</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-nav">
+          <button class="blog-dot active" data-blog="0">1</button>
+          <button class="blog-dot" data-blog="1">2</button>
+          <button class="blog-dot" data-blog="2">3</button>
+          <button class="blog-dot" data-blog="3">4</button>
+        </div>
+
+        <a href="#" class="btn-primary" style="margin-top:32px;">See All Blog</a>
+      </div>
+    </section>
+    <!-- CTA -->
+    <section class="section cta-section">
+      <div class="cta-grid-bg"></div>
+      <div class="cta-inner">
+        <p class="section-eyebrow">Let's Collaborate</p>
+        <h2 class="section-heading">Let's Elevate Your Brand —<br><em class="hero-gradient-text">Starting Today</em></h2>
+        <p class="section-desc">Whether you're launching something new or reinventing your brand, our team is here to help. Let's connect and craft the next big move together.</p>
+        <div class="cta-buttons">
+          <a href="#contact" class="btn-primary">Let's Talk</a>
+          <a href="#" class="btn-outline">Book a Free Call</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid-bg"></div>
+    <div class="footer-inner">
+      <!-- Contact Row -->
+      <div class="footer-contact-row">
+        <div class="footer-contact-left">
+          <h2 class="footer-contact-heading">Ready To Get<br><em class="hero-gradient-text">Started?</em></h2>
+          <p class="footer-contact-desc">If there are questions you want to ask, we will answer all your questions.</p>
+          <form class="footer-form" onsubmit="return false;">
+            <input type="email" placeholder="Enter your email" class="footer-input" required>
+            <button type="submit" class="btn-primary" style="padding:12px 24px;font-size:15px;">Subscribe</button>
+          </form>
+        </div>
+        <div class="footer-contact-right">
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#case-studies">Portfolio</a>
+            <a href="#contact">Contact Us</a>
+          </div>
+          <div class="footer-col">
+            <h4>Utility Page</h4>
+            <a href="#">Changelog</a>
+            <a href="#">License</a>
+            <a href="#">Instructions</a>
+            <a href="#">Style Guide</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright + Socials -->
+      <div class="footer-bottom">
+        <p>&copy; Copyright — <strong>Vexcav</strong> Designed by <a href="#">Anova Flow</a></p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Large Watermark -->
+      <div class="footer-watermark">Vexcav</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
